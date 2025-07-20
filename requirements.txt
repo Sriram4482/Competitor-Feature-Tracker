@@ -1,0 +1,5 @@
+streamlit
+slack_sdk
+python-dotenv
+google-generativeai
+requests

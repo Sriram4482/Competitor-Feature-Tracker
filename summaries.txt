@@ -1,0 +1,20 @@
+URL: https://slack.com/release-notes
+There are no new features in the provided Slack for Mac release notes.  All listed updates are bug fixes or security improvements:
+
+* **Slack 4.45.60 (July 14, 2025):** Bug fixes (no specifics provided).
+* **Slack 4.44.65 (June 9, 2025):** Security improvements.
+* **Slack 4.44.63 (June 2, 2025):** Bug fixes (too minor to detail).
+* **Slack 4.44.60 (May 19, 2025):** Bug fixes (generally improved app).
+* **Slack 4.44.59 (May 5, 2025):** Bug fixes (no specifics provided).
+
+There are no pricing changes mentioned.
+
+URL: https://notion.so/changelog
+* **New Features:**
+    * AI Meeting Notes: AI-powered transcription and summarization of meetings.
+    * Enterprise Search:  A single search function to find information across all company knowledge and integrated apps within Notion.
+    * Notion Mail: An integrated email inbox.
+    * Notion Calendar: Integrated calendar for time management.
+
+* **No Pricing Changes Mentioned:** The provided text doesn't detail any alterations to Notion's pricing structure.
+
