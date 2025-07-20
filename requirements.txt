@@ -1,5 +1,7 @@
 streamlit
-slack_sdk
 python-dotenv
-google-generativeai
+slack_sdk
 requests
+yagmail
+schedule
+google-generativeai

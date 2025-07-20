@@ -1,26 +1,31 @@
-# tracker.py
-
 import os
 import requests
 from dotenv import load_dotenv
 from google.generativeai import GenerativeModel, configure
 from slack_sdk import WebClient
+import smtplib
+from email.mime.text import MIMEText
 
-# Load env
+# Load .env
 load_dotenv()
 
+# Secrets
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 SLACK_BOT_TOKEN = os.getenv("SLACK_BOT_TOKEN")
 SLACK_CHANNEL = os.getenv("SLACK_CHANNEL")
+EMAIL_USER = os.getenv("EMAIL_USER")
+EMAIL_APP_PASSWORD = os.getenv("EMAIL_APP_PASSWORD")
+EMAIL_TO = os.getenv("EMAIL_TO")
 
+# Configure Gemini & Slack
 configure(api_key=GEMINI_API_KEY)
 model = GenerativeModel("gemini-1.5-pro")
 slack_client = WebClient(token=SLACK_BOT_TOKEN)
 
+# Competitor URLs
 urls = [
-    
     "https://www.oneplus.com/support/softwareupgrade",
-    "https://miuirom.xiaomi.com/rom/u11.html",  # Official MIUI page
+    "https://miuirom.xiaomi.com/rom/u11.html",
     "https://learn.microsoft.com/en-us/windows/whats-new/",
     "https://developer.apple.com/news/releases/",
     "https://source.android.com/docs/setup/start/release-notes",
@@ -29,8 +34,7 @@ urls = [
     "https://www.notion.so/changelog"
 ]
 
-
-
+# Fetch page
 def fetch_page(url):
     print(f"🔍 Fetching: {url}")
     try:
@@ -44,7 +48,7 @@ def fetch_page(url):
         print(f"❌ Error: {e}")
     return None
 
-
+# Summarize
 def summarize(text):
     try:
         res = model.generate_content(
@@ -55,7 +59,7 @@ def summarize(text):
         print(f"❌ Gemini error: {e}")
         return None
 
-
+# Send to Slack
 def send_to_slack(summary):
     try:
         response = slack_client.chat_postMessage(
@@ -70,7 +74,20 @@ def send_to_slack(summary):
     except Exception as e:
         print(f"❌ Slack error: {e}")
 
+# Send Email
+def send_email_report(subject, body):
+    msg = MIMEText(body)
+    msg["Subject"] = subject
+    msg["From"] = EMAIL_USER
+    msg["To"] = EMAIL_TO
 
+    with smtplib.SMTP_SSL("smtp.gmail.com", 465) as smtp:
+        smtp.login(EMAIL_USER, EMAIL_APP_PASSWORD)
+        smtp.send_message(msg)
+
+    print("✅ Email sent!")
+
+# Run everything
 def run_tracker():
     report = []
     for url in urls:
@@ -83,11 +100,12 @@ def run_tracker():
     final_summary = "\n\n".join(report)
     if final_summary:
         send_to_slack(final_summary)
-        return final_summary
+        send_email_report("🚀 Competitor Tracker Report", final_summary)
+        return final_summary + "\n\n📧 Email sent!"
     else:
         return "⚠️ No summaries available!"
 
-
+# Run directly
 if __name__ == "__main__":
     result = run_tracker()
     print("\n=== Final Report ===")
