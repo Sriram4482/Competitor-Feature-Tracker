@@ -1,5 +1,6 @@
 import os
 import requests
+import streamlit as st
 from dotenv import load_dotenv
 from google.generativeai import GenerativeModel, configure
 from slack_sdk import WebClient
@@ -10,12 +11,12 @@ from email.mime.text import MIMEText
 load_dotenv()
 
 # Secrets
-GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
-SLACK_BOT_TOKEN = os.getenv("SLACK_BOT_TOKEN")
-SLACK_CHANNEL = os.getenv("SLACK_CHANNEL")
-EMAIL_USER = os.getenv("EMAIL_USER")
-EMAIL_APP_PASSWORD = os.getenv("EMAIL_APP_PASSWORD")
-EMAIL_TO = os.getenv("EMAIL_TO")
+GEMINI_API_KEY = st.secrets["GEMINI_API_KEY"]
+SLACK_BOT_TOKEN = st.secrets["SLACK_BOT_TOKEN"]
+SLACK_CHANNEL = st.secrets["SLACK_CHANNEL"]
+EMAIL_USER = st.secrets["EMAIL_USER"]
+EMAIL_APP_PASSWORD = st.secrets["EMAIL_APP_PASSWORD"]
+EMAIL_TO = st.secrets["EMAIL_TO"]
 
 # Configure Gemini & Slack
 configure(api_key=GEMINI_API_KEY)
