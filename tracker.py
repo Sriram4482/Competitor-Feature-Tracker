@@ -10,12 +10,13 @@ from email.mime.text import MIMEText
 load_dotenv()
 
 # Secrets
-GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
-SLACK_BOT_TOKEN = os.getenv("SLACK_BOT_TOKEN")
-SLACK_CHANNEL = os.getenv("SLACK_CHANNEL")
-EMAIL_USER = os.getenv("EMAIL_USER")
-EMAIL_APP_PASSWORD = os.getenv("EMAIL_APP_PASSWORD")
-EMAIL_TO = os.getenv("EMAIL_TO")
+GEMINI_API_KEY = st.secrets.get("GEMINI_API_KEY", os.getenv("GEMINI_API_KEY"))
+SLACK_BOT_TOKEN = st.secrets.get("SLACK_BOT_TOKEN", os.getenv("SLACK_BOT_TOKEN"))
+SLACK_CHANNEL = st.secrets.get("SLACK_CHANNEL", os.getenv("SLACK_CHANNEL"))
+
+EMAIL_USER = st.secrets.get("EMAIL_USER", os.getenv("EMAIL_USER"))
+EMAIL_APP_PASSWORD = st.secrets.get("EMAIL_APP_PASSWORD", os.getenv("EMAIL_APP_PASSWORD"))
+EMAIL_TO = st.secrets.get("EMAIL_TO", os.getenv("EMAIL_TO"))
 
 # Configure Gemini & Slack
 configure(api_key=GEMINI_API_KEY)
