@@ -1,3 +1,6 @@
+PROJECT LIVE LINK : https://competitor-feature-tracker.streamlit.app/
+
+
 # 🚀 Competitor Feature Tracker
 
 This project tracks competitor changelogs & release notes, summarizes them using Gemini AI, and posts updates to Slack.  
@@ -37,3 +40,5 @@ pip install -r requirements.txt
 
  Run the tracker: python tracker.py
 Run the Streamlit dashboard : streamlit run app.py
+
+
